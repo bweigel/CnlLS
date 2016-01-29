@@ -25,14 +25,14 @@ int main() {
     mynLM.fitModel(initial_x, &expb_f, &expb_df);
     mynLM.printSummary();
 
-    std::vector<double> MM_par = {10, 5, 2};
-    simulation MM_sim = Hill_simulate(in, MM_par, 0.05);
+    std::vector<double> MM_par = {10, 5, 25};
+    simulation MM_sim = SubInh_simulate(in, MM_par, 0.05);
 
     // create Clnm object
     mynLM.setXY(MM_sim);
     // fit with initial parameters
     std::vector<double> initial_MM = {9, 4, 1};
-    mynLM.fitModel(initial_MM, &Hill_f);
+    mynLM.fitModel(initial_MM, &SubInh_f, &SubInh_df);
     mynLM.printSummary();
 
     return 0;
