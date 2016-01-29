@@ -15,18 +15,18 @@ int main() {
     for(unsigned i = 0; i < N; i++){
         in.push_back(i/3.0);
     }
-    std::vector<double> exp_par = {1, 5, -0.1};
-    simulation exp_sim = expb_simulate(in, exp_par, 0.05);
+    std::vector<double> exp_par = {23,24};
+    simulation exp_sim = simulate(in, exp_par, 0.05, MM);
 
     // create Clnm object
     Cnlm mynLM(exp_sim);
     // fit with initial parameters
-    std::vector<double> initial_x = {1, 5, -0.1};
-    mynLM.fitModel(initial_x, &expb_f, &expb_df);
+    std::vector<double> initial_x = {1, 5};
+    mynLM.fitModel(initial_x, &MM_f, &MM_df);
     mynLM.printSummary();
 
-    std::vector<double> MM_par = {10, 5, 25, 3};
-    simulation MM_sim = CompInh_simulate(in, MM_par, 0.05);
+    std::vector<double> MM_par = {10, 5, 25};
+    simulation MM_sim = simulate(in, MM_par, 0.05, SubInh);
 
     // create Clnm object
     mynLM.setXY(MM_sim);

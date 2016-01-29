@@ -54,41 +54,6 @@ Yi = A * exp(-lambda * i) + b */
     return GSL_SUCCESS;
 }
 
-simulation expb_simulate(std::vector<double> x, std::vector<double> param, double si){
-
-    gsl_rng * r;
-    const gsl_rng_type * type;
-    gsl_rng_env_setup();
-    unsigned n = x.size();
-
-    simulation out;
-    out.p = param.size();
-    out.n = n;
-    out.x.assign(x.begin(), x.end());
-    out.sigma.assign(n, si);
-
-    for(unsigned i = 0; i < out.p; i++){
-        out.param.push_back(param[i]);
-    }
-
-    // start RNG
-    type = gsl_rng_default;
-    r = gsl_rng_alloc (type);
-
-    // simulate data with some noise
-    for (unsigned i = 0; i < n; i++)
-    {
-        double yi = out.param[0]+ out.param[1] * exp (out.param[2] * x[i]);
-        double s = si;
-        double dy = gsl_ran_gaussian(r, s);
-
-        out.y.push_back(yi + dy);
-        out.weights.push_back(1.0/(s*s));
-    }
-
-    gsl_rng_free (r);
-    return out;
-}
 
 /*
  * Michaelis Menten

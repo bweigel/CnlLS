@@ -57,16 +57,15 @@ private:
 
 void print_state(size_t iter, gsl_multifit_fdfsolver * s);
 
-// function to simulate data
-simulation expb_simulate(std::vector<double> x, std::vector<double> param,
-        double si);
-simulation MM_simulate(std::vector<double> x, std::vector<double> param,
-        double si); // Y = Vmax*X/(Km+X)	--> parameters c0 = Vmax, c1 = Km
-simulation Hill_simulate(std::vector<double> x, std::vector<double> param,
-        double si);	// Y = Vmax*x^n/(Km + x^n) --> parameters c0 = Vmax, c1 = Km, c2 = n
-simulation SubInh_simulate(std::vector<double> x, std::vector<double> param,
-        double si);	// Y = Vmax'*x/(Km'+x+x^2/Ksi) --> parameters c0 = Vmax, c1 = Km, c2 = KSi
-simulation CompInh_simulate(std::vector<double> x, std::vector<double> param, double si);
+// functions to simulate data
+simulation simulate(std::vector<double> x, std::vector<double> param, double si,
+		double (*FUN)(const double, const std::vector<double>));
+double MM(const double x, const std::vector<double> param); // Y = Vmax*X/(Km+X)	--> parameters c0 = Vmax, c1 = Km
+double Hill(const double x, const std::vector<double> param); // Y = Vmax*x^n/(Km + x^n) --> parameters c0 = Vmax, c1 = Km, c2 = n
+double CompInh(const double x, const std::vector<double> param); // Y = Vmax'*x/(Km'+x+x^2/Ksi) --> parameters c0 = Vmax, c1 = Km, c2 = KSi
+double SubInh(const double x, const std::vector<double> param);
+double expb(const double x, const std::vector<double> param);
+
 
 // fit functions
 int expb_f(const gsl_vector * x, void *data, gsl_vector * f);
