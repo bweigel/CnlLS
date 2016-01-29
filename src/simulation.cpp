@@ -47,6 +47,7 @@ simulation simulate(std::vector<double> x, std::vector<double> param, double si,
     // simulate data with some noise
     for (unsigned i = 0; i < n; i++)
     {
+    	// pass x with parameters to the function specified in the arguments
         double yi = FUN(x[i], out.param);
         double s = si;
         double dy = gsl_ran_gaussian(r, s);
@@ -54,7 +55,7 @@ simulation simulate(std::vector<double> x, std::vector<double> param, double si,
         out.y.push_back(yi + dy);
         out.weights.push_back(1.0/(s*s));
     }
-
+    // deallocate memory from RNG
     gsl_rng_free (r);
     return out;
 }

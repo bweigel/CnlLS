@@ -62,8 +62,9 @@ simulation simulate(std::vector<double> x, std::vector<double> param, double si,
 		double (*FUN)(const double, const std::vector<double>));
 double MM(const double x, const std::vector<double> param); // Y = Vmax*X/(Km+X)	--> parameters c0 = Vmax, c1 = Km
 double Hill(const double x, const std::vector<double> param); // Y = Vmax*x^n/(Km + x^n) --> parameters c0 = Vmax, c1 = Km, c2 = n
-double CompInh(const double x, const std::vector<double> param); // Y = Vmax'*x/(Km'+x+x^2/Ksi) --> parameters c0 = Vmax, c1 = Km, c2 = KSi
-double SubInh(const double x, const std::vector<double> param);
+double CompInh(const double x, const std::vector<double> param); 	// Y = Vmax'*x/(Km'* (1 + i/Ki) + x)
+																	// --> parameters c0 = Vmax, c1 = Km, c2 = Ki, c3 = i
+double SubInh(const double x, const std::vector<double> param);// Y = Vmax'*x/(Km'+x+x^2/Ksi) --> parameters c0 = Vmax, c1 = Km, c2 = KSi
 double expb(const double x, const std::vector<double> param);
 
 
