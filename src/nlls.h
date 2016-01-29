@@ -66,6 +66,7 @@ simulation Hill_simulate(std::vector<double> x, std::vector<double> param,
         double si);	// Y = Vmax*x^n/(Km + x^n) --> parameters c0 = Vmax, c1 = Km, c2 = n
 simulation SubInh_simulate(std::vector<double> x, std::vector<double> param,
         double si);	// Y = Vmax'*x/(Km'+x+x^2/Ksi) --> parameters c0 = Vmax, c1 = Km, c2 = KSi
+simulation CompInh_simulate(std::vector<double> x, std::vector<double> param, double si);
 
 // fit functions
 int expb_f(const gsl_vector * x, void *data, gsl_vector * f);

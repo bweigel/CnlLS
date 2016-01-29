@@ -25,8 +25,8 @@ int main() {
     mynLM.fitModel(initial_x, &expb_f, &expb_df);
     mynLM.printSummary();
 
-    std::vector<double> MM_par = {10, 5, 25};
-    simulation MM_sim = SubInh_simulate(in, MM_par, 0.05);
+    std::vector<double> MM_par = {10, 5, 25, 3};
+    simulation MM_sim = CompInh_simulate(in, MM_par, 0.05);
 
     // create Clnm object
     mynLM.setXY(MM_sim);
